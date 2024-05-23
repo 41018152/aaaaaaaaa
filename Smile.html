@@ -67,7 +67,12 @@
     <script>
         window.onload = function() {
             alert('姐姐請打開');
-            document.getElementById('modal1').style.display = 'block'; // 顯示 modal1
+            setTimeout(function() {
+                alert('建議使用外部瀏覽器');
+                setTimeout(function() {
+                    document.getElementById('modal1').style.display = 'block';
+                }, 100);
+            }, 100);
         }
 
         function showModal2() {
