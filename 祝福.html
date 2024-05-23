@@ -71,6 +71,8 @@
 <body>
 
     <h1>祝福</h1>
+    <button class="btn" id="play-btn" onclick="playAudio()">點我</button>
+
     <div id="card">
         <img id="bg" src="2.png" alt="背景" />
         <table>
@@ -105,29 +107,27 @@
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        function playAudio() {
             const audioElement = document.getElementById('background-audio');
+            const playBtn = document.getElementById('play-btn');
+
+            playBtn.style.display = 'none';
             audioElement.controls = false;
 
             // 儲存初始音訊源
             const originalSrc = audioElement.src;
 
             // 嘗試播放音訊
-            const playAudio = () => {
-                audioElement.play().catch(() => {
-                    // 如果音.mp3 播放失敗，嘗試音.ogg
-                    if (audioElement.src !== originalSrc.replace('.mp3', '.ogg')) {
-                        audioElement.src = originalSrc.replace('.mp3', '.ogg');
-                        audioElement.play().catch((error) => {
-                            console.error("音訊播放失敗:", error);
-                        });
-                    }
-                });
-            };
-
-            // 延遲 1 秒後開始播放
-            setTimeout(playAudio, 1000);
-        });
+            audioElement.play().catch(() => {
+                // 如果音.mp3 播放失敗，嘗試音.ogg
+                if (audioElement.src !== originalSrc.replace('.mp3', '.ogg')) {
+                    audioElement.src = originalSrc.replace('.mp3', '.ogg');
+                    audioElement.play().catch((error) => {
+                        console.error("音訊播放失敗:", error);
+                    });
+                }
+            });
+        }
 
         function captureCard() {
             const cardElement = document.getElementById('card');
