@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
             text-align: center;
             background-color: #f9f9f9;
         }
+
         #card {
             position: relative;
             display: inline-block;
@@ -17,6 +19,7 @@
             border: 1px solid #ddd;
             background-color: rgba(255, 255, 255, 0.8);
         }
+
         #bg {
             position: absolute;
             top: 0;
@@ -26,26 +29,33 @@
             opacity: 0.5;
             z-index: -1;
         }
+
         table {
             margin: 20px auto;
             border-collapse: collapse;
             width: 80%;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
+
         th {
             background-color: #f2f2f2;
             color: #333;
         }
+
         tr:hover {
             background-color: #f1f1f1;
         }
+
         .btn-container {
             margin: 20px;
         }
+
         .btn {
             padding: 10px 20px;
             font-size: 16px;
@@ -57,11 +67,12 @@
         }
     </style>
 </head>
+
 <body>
 
     <h1>祝福</h1>
     <div id="card">
-        <img id="bg" src="2.png" alt="背景"/>
+        <img id="bg" src="2.png" alt="背景" />
         <table>
             <tr>
                 <th>祝福內容</th>
@@ -90,8 +101,19 @@
         <button class="btn" onclick="captureCard()">截圖保存</button>
     </div>
 
+    <audio id="background-audio" autoplay loop>
+        <source src="音.mp3" type="audio/mpeg">
+        <source src="音.ogg" type="audio/ogg">
+    </audio>
+
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script>
+        // 確認 DOM 完全加載後隱藏 audio 控制元件並自動播放
+        document.addEventListener('DOMContentLoaded', function () {
+            const audioElement = document.getElementById('background-audio');
+            audioElement.controls = false;
+        });
+
         function captureCard() {
             const cardElement = document.getElementById('card');
             const bgImage = document.getElementById('bg');
@@ -119,4 +141,5 @@
     </script>
 
 </body>
+
 </html>
