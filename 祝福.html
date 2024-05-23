@@ -75,7 +75,7 @@
         <img id="bg" src="2.png" alt="背景" />
         <table>
             <tr>
-                <th>祝福內容</th>
+                <th>我們想對妳說的話</th>
                 <th>留言人</th>
             </tr>
             <tr>
@@ -101,10 +101,7 @@
         <button class="btn" onclick="captureCard()">截圖保存</button>
     </div>
 
-    <audio id="background-audio" controls>
-        <source src="音.mp3" type="audio/mpeg">
-        <source src="音.ogg" type="audio/ogg">
-    </audio>
+    <audio id="background-audio" src="音.mp3" type="audio/mpeg"></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script>
@@ -112,13 +109,24 @@
             const audioElement = document.getElementById('background-audio');
             audioElement.controls = false;
 
-            // 在 1 秒後開始撥放音樂
-            setTimeout(() => {
+            // 儲存初始音訊源
+            const originalSrc = audioElement.src;
+
+            // 嘗試播放音訊
+            const playAudio = () => {
                 audioElement.play().catch(() => {
-                    // 如果音.mp3 撥放失敗，嘗試音.ogg
-                    audioElement.firstElementChild.nextElementSibling && audioElement.load();
+                    // 如果音.mp3 播放失敗，嘗試音.ogg
+                    if (audioElement.src !== originalSrc.replace('.mp3', '.ogg')) {
+                        audioElement.src = originalSrc.replace('.mp3', '.ogg');
+                        audioElement.play().catch((error) => {
+                            console.error("音訊播放失敗:", error);
+                        });
+                    }
                 });
-            }, 1000); // 延遲 1 秒
+            };
+
+            // 延遲 1 秒後開始播放
+            setTimeout(playAudio, 1000);
         });
 
         function captureCard() {
