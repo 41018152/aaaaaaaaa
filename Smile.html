@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>笑姐姐請打開!</title>
+    <style>
+        body {
+            background-image: url('1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .modal {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            position: absolute;
+            display: none; /* 初始化為隱藏 */
+        }
+        .hide-left {
+            animation: hideLeft 0.5s forwards;
+        }
+        .hide-right {
+            animation: hideRight 0.5s forwards;
+        }
+        @keyframes hideLeft {
+            to { transform: translateX(-100vw); opacity: 0; }
+        }
+        @keyframes hideRight {
+            to { transform: translateX(100vw); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="modal1" class="modal">
+        <p>姐姐你知道今天是什麼日子嗎</p>
+        <button onclick="showModal2()">知道啦!</button>
+    </div>
+    <div id="modal2" class="modal" style="display:none">
+        <p>今天是上課的一天</p>
+        <button onclick="showModal3()">蛤?</button>
+    </div>
+    <div id="modal3" class="modal" style="display:none">
+        <p>狼有沒有很可愛</p>
+        <button onclick="openBlessing(true)">可愛</button>
+        <button onclick="openBlessing(false)">不可愛</button>
+    </div>
+    <!-- 新的視窗模態框 -->
+    <div id="waitingModal" class="modal" style="display:none">
+        <p>好啦 不鬧妳了 等待一下 帶妳進入賣場把你賣掉</p>
+    </div>
+    <script>
+        window.onload = function() {
+            alert('姐姐請打開');
+            document.getElementById('modal1').style.display = 'block'; // 顯示 modal1
+        }
+
+        function showModal2() {
+            document.getElementById('modal1').classList.add('hide-left');
+            setTimeout(() => {
+                document.getElementById('modal1').style.display = 'none';
+                document.getElementById('modal2').style.display = 'block';
+            }, 500);
+        }
+
+        function showModal3() {
+            document.getElementById('modal2').classList.add('hide-right');
+            setTimeout(() => {
+                document.getElementById('modal2').style.display = 'none';
+                document.getElementById('modal3').style.display = 'block';
+            }, 500);
+        }
+
+        function openBlessing(isCute) {
+            if (isCute) {
+                document.getElementById('modal3').style.display = 'none';
+                document.getElementById('waitingModal').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '祝福.html';
+                }, 5000);
+            } else {
+                alert('不能按不可愛 已自動幫你導向可愛');
+                document.getElementById('modal3').style.display = 'none';
+                document.getElementById('waitingModal').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '祝福.html';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>祝福</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        #card {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        #bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn-container {
+            margin: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>祝福</h1>
+    <div id="card">
+        <img id="bg" src="2.png" alt="背景"/>
+        <table>
+            <tr>
+                <th>祝福內容</th>
+                <th>留言人</th>
+            </tr>
+            <tr>
+                <td>祝妳找到一個可以疼妳的如意郎君 永遠青春美麗 生日快樂</td>
+                <td>靓靓蝶</td>
+            </tr>
+            <tr>
+                <td>Hey sweetheart, 雖然沒有認識妳很久..但這段時間很開心跟妳一起和大家玩遊戲跟打打鬧鬧，在這個特別的日子裡祝妳生日快樂🎂 Happy birthday 🎁😘</td>
+                <td>伊伊風</td>
+            </tr>
+            <tr>
+                <td>希望妳身體健康 青春美麗 學業進步 然後風之國度可以玩得更好</td>
+                <td>帥帥雷</td>
+            </tr>
+            <tr>
+                <td>祝妳生日快樂 永遠美麗 身體健康 美麗的笑大姊姊~~ 等你變強然後帶我飛 啾~</td>
+                <td>可愛狼</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btn-container">
+        <button class="btn" onclick="captureCard()">截圖保存</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        function captureCard() {
+            const cardElement = document.getElementById('card');
+            const bgImage = document.getElementById('bg');
+
+            // 確保背景圖片加載完成後再進行截圖
+            bgImage.onload = () => {
+                html2canvas(cardElement).then(canvas => {
+                    let link = document.createElement('a');
+                    link.download = '祝福賀卡.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            };
+
+            // 如果圖片已經加載完成，則直接進行截圖
+            if (bgImage.complete) {
+                html2canvas(cardElement).then(canvas => {
+                    let link = document.createElement('a');
+                    link.download = '祝福賀卡.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
